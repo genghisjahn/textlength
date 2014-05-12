@@ -4,13 +4,29 @@ import "errors"
 import "fmt"
 import "strconv"
 import "math"
+import "strings"
 
 var singleValueErrorMessage = "Value supplied was %v.  Value must be %v %v."
 var somethingWentWrongErrorMesasge = "Something went wrong in GetTextofThreeDigitNumber!"
 var notImplementedYet = "Not implemented yet."
 
 func GetTextForInt(i int) (string, error) {
-	return getTextOfThreeDigitNumber(i, "")
+	stringInt := strconv.Itoa(i)
+	stringLen := len(stringInt)
+	err := errors.New("")
+	err = nil
+	result := ""
+	if stringLen > 0 && stringLen <= 3 {
+		result, err = getTextOfThreeDigitNumber(i, "")
+	}
+	if stringLen > 3 && stringLen <= 6 {
+		hundredsDigits := int(math.Mod(float64(i), float64(1000)))
+		thousandsDigits := int(i / 1000)
+		hundredsResult, _ := getTextOfThreeDigitNumber(hundredsDigits, "")
+		thousandsResult, _ := getTextOfThreeDigitNumber(thousandsDigits, "thousand")
+		result = fmt.Sprintf("%v %v", thousandsResult, hundredsResult)
+	}
+	return strings.TrimSpace(result), err
 }
 
 func getTextOfThreeDigitNumber(i int, suffix string) (string, error) {
@@ -37,6 +53,9 @@ func getTextOfThreeDigitNumber(i int, suffix string) (string, error) {
 			} else {
 				result = fmt.Sprintf("%v hundred", text)
 			}
+			if suffix != "" {
+				result = fmt.Sprintf("%v %v", result, suffix)
+			}
 			return result, err
 		}
 	case 2:
@@ -44,6 +63,9 @@ func getTextOfThreeDigitNumber(i int, suffix string) (string, error) {
 			num, _ := strconv.Atoi(stringInt)
 			text, err := getTextForTwoDigitNum(num)
 			result = fmt.Sprintf("%v", text)
+			if suffix != "" {
+				result = fmt.Sprintf("%v %v", result, suffix)
+			}
 			return result, err
 		}
 	case 1:
@@ -51,6 +73,9 @@ func getTextOfThreeDigitNumber(i int, suffix string) (string, error) {
 			num, _ := strconv.Atoi(stringInt)
 			text, err := getTextForOneDigit(num)
 			result = fmt.Sprintf("%v", text)
+			if suffix != "" {
+				result = fmt.Sprintf("%v %v", result, suffix)
+			}
 			return result, err
 		}
 	}

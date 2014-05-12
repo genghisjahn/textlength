@@ -22,11 +22,28 @@ func TestThreeDigitOrLessNumbers(t *testing.T) {
 	runNumberTest(999, "nine hundred ninety-nine", t)
 }
 
-/*
-func TestFourDigitNumbers(t *testing.T) {
-	runNumberTest(1001, "one thousand one", t)
+func TestFourToSixDigitNumbers(t *testing.T) {
+	runNumberTest(2001, "two thousand one", t)
+	runNumberTest(2010, "two thousand ten", t)
+	runNumberTest(2012, "two thousand twelve", t)
+	runNumberTest(2562, "two thousand five hundred sixty-two", t)
+	runNumberTest(9000, "nine thousand", t)
+	runNumberTest(9999, "nine thousand nine hundred ninety-nine", t)
+	runNumberTest(12001, "twelve thousand one", t)
+	runNumberTest(22010, "twenty-two thousand ten", t)
+	runNumberTest(32012, "thirty-two thousand twelve", t)
+	runNumberTest(42562, "forty-two thousand five hundred sixty-two", t)
+	runNumberTest(59000, "fifty-nine thousand", t)
+	runNumberTest(69999, "sixty-nine thousand nine hundred ninety-nine", t)
+	runNumberTest(938469, "nine hundred thirty-eight thousand four hundred sixty-nine", t)
+	runNumberTest(957395, "nine hundred fifty-seven thousand three hundred ninety-five", t)
+	runNumberTest(791124, "seven hundred ninety-one thousand one hundred twenty-four", t)
+	runNumberTest(642886, "six hundred forty-two thousand eight hundred eighty-six", t)
+	runNumberTest(559621, "five hundred fifty-nine thousand six hundred twenty-one", t)
+	runNumberTest(492319, "four hundred ninety-two thousand three hundred nineteen", t)
+	runNumberTest(999999, "nine hundred ninety-nine thousand nine hundred ninety-nine", t)
+
 }
-*/
 
 func runNumberTest(num int, text string, t *testing.T) (string, error) {
 	result, err := GetTextForInt(num)
@@ -34,7 +51,7 @@ func runNumberTest(num int, text string, t *testing.T) (string, error) {
 		t.Error(err)
 	}
 	if result != text {
-		err = errors.New(fmt.Sprintf("\nGave: %v\nExpected: %v\nResult: %v", num, text, result))
+		err = errors.New(fmt.Sprintf("\nGave: %v\nExpected: {%v}\nResult: {%v}", num, text, result))
 		t.Error(err)
 	}
 	return result, nil
