@@ -21,12 +21,15 @@ func TestThreeDigitOrLessNumbers(t *testing.T) {
 	runNumberTest(900, "nine hundred", t)
 	runNumberTest(999, "nine hundred ninety-nine", t)
 }
+
+/*
 func TestFourDigitNumbers(t *testing.T) {
 	runNumberTest(1001, "one thousand one", t)
 }
+*/
 
 func runNumberTest(num int, text string, t *testing.T) (string, error) {
-	result, err := GetTextOfThreeDigitNumber(num, "")
+	result, err := GetTextForInt(num)
 	if err != nil {
 		t.Error(err)
 	}

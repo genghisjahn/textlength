@@ -9,7 +9,11 @@ var singleValueErrorMessage = "Value supplied was %v.  Value must be %v %v."
 var somethingWentWrongErrorMesasge = "Something went wrong in GetTextofThreeDigitNumber!"
 var notImplementedYet = "Not implemented yet."
 
-func GetTextOfThreeDigitNumber(i int, suffix string) (string, error) {
+func GetTextForInt(i int) (string, error) {
+	return getTextOfThreeDigitNumber(i, "")
+}
+
+func getTextOfThreeDigitNumber(i int, suffix string) (string, error) {
 	result := ""
 	maxLength := 1000
 	stringInt := strconv.Itoa(i)
@@ -25,9 +29,9 @@ func GetTextOfThreeDigitNumber(i int, suffix string) (string, error) {
 	case 3:
 		{
 			num, _ := strconv.Atoi(string(stringInt[0]))
-			text, err := GetTextForOneDigit(num)
+			text, err := getTextForOneDigit(num)
 			twoDigits := int(math.Mod(float64(i), float64(100)))
-			text2, _ := GetTextForTwoDigitNum(twoDigits)
+			text2, _ := getTextForTwoDigitNum(twoDigits)
 			if twoDigits > 0 {
 				result = fmt.Sprintf("%v hundred %v", text, text2)
 			} else {
@@ -38,14 +42,14 @@ func GetTextOfThreeDigitNumber(i int, suffix string) (string, error) {
 	case 2:
 		{
 			num, _ := strconv.Atoi(stringInt)
-			text, err := GetTextForTwoDigitNum(num)
+			text, err := getTextForTwoDigitNum(num)
 			result = fmt.Sprintf("%v", text)
 			return result, err
 		}
 	case 1:
 		{
 			num, _ := strconv.Atoi(stringInt)
-			text, err := GetTextForOneDigit(num)
+			text, err := getTextForOneDigit(num)
 			result = fmt.Sprintf("%v", text)
 			return result, err
 		}
@@ -54,7 +58,7 @@ func GetTextOfThreeDigitNumber(i int, suffix string) (string, error) {
 	return "", err_default
 }
 
-func GetTextForOneDigit(i int) (string, error) {
+func getTextForOneDigit(i int) (string, error) {
 	result := ""
 	if i > 9 {
 		err := errors.New(fmt.Sprintf(singleValueErrorMessage, i, "less than", 10))
@@ -86,12 +90,12 @@ func GetTextForOneDigit(i int) (string, error) {
 
 	return result, nil
 }
-func GetTextForTwoDigitNum(i int) (string, error) {
+func getTextForTwoDigitNum(i int) (string, error) {
 	result := ""
 	tensPlace := ""
 	if i < 16 {
 		if i < 10 {
-			result, _ = GetTextForOneDigit(i)
+			result, _ = getTextForOneDigit(i)
 		}
 		switch i {
 		case 10:
@@ -148,7 +152,7 @@ func GetTextForTwoDigitNum(i int) (string, error) {
 	if i >= 90 {
 		tensPlace = "ninety"
 	}
-	onesDigit, _ := GetTextForOneDigit(int(math.Mod(float64(i), float64(10))))
+	onesDigit, _ := getTextForOneDigit(int(math.Mod(float64(i), float64(10))))
 	if tensPlace != "teen" && onesDigit != "" {
 		result = fmt.Sprintf("%v-%v", tensPlace, onesDigit)
 	} else {
