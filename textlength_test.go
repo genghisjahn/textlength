@@ -42,17 +42,33 @@ func TestFourToSixDigitNumbers(t *testing.T) {
 	runNumberTest(559621, "five hundred fifty-nine thousand six hundred twenty-one", t)
 	runNumberTest(492319, "four hundred ninety-two thousand three hundred nineteen", t)
 	runNumberTest(999999, "nine hundred ninety-nine thousand nine hundred ninety-nine", t)
+}
 
+func TestSevenToNineDigitNumbers(t *testing.T) {
+	runNumberTest(2000000, "two million", t)
+	runNumberTest(2032012, "two million thirty-two thousand twelve", t)
+	runNumberTest(1938469, "one million nine hundred thirty-eight thousand four hundred sixty-nine", t)
+	runNumberTest(62032776, "sixty-two million thirty-two thousand seven hundred seventy-six", t)
+	runNumberTest(72132888, "seventy-two million one hundred thirty-two thousand eight hundred eighty-eight", t)
+	runNumberTest(800000000, "eight hundred million", t)
+	runNumberTest(813015010, "eight hundred thirteen million fifteen thousand ten", t)
+	runNumberTest(999999999, "nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine", t)
+}
+
+func TestOverOneBillion(t *testing.T) {
+	runNumberTest(1000000000, "one billion", t)
+	runNumberTest(999999999999, "nine hundred ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine", t)
 }
 
 func runNumberTest(num int, text string, t *testing.T) (string, error) {
 	result, err := GetTextForInt(num)
 	if err != nil {
 		t.Error(err)
-	}
-	if result != text {
-		err = errors.New(fmt.Sprintf("\nGave: %v\nExpected: {%v}\nResult: {%v}", num, text, result))
-		t.Error(err)
+	} else {
+		if result != text {
+			err = errors.New(fmt.Sprintf("\nGave: %v\nExpected: {%v}\nResult: {%v}", num, text, result))
+			t.Error(err)
+		}
 	}
 	return result, nil
 }
