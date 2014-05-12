@@ -146,7 +146,7 @@ func GetTextForTwoDigitNum(i int) (string, error) {
 		tensPlace = "eighty"
 	}
 	if i >= 90 {
-		tensPlace = "niney"
+		tensPlace = "ninety"
 	}
 	onesDigit, _ := GetTextForOneDigit(int(math.Mod(float64(i), float64(10))))
 	if tensPlace != "teen" && onesDigit != "" {

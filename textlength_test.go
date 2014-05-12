@@ -14,9 +14,12 @@ func TestNumbers(t *testing.T) {
 	runNumberTest(100, "one hundred", t)
 	runNumberTest(110, "one hundred ten", t)
 	runNumberTest(320, "three hundred twenty", t)
+	runNumberTest(330, "three hundred thirty", t)
+	runNumberTest(380, "three hundred eighty", t)
 	runNumberTest(562, "five hundred sixty-two", t)
 	runNumberTest(814, "eight hundred fourteen", t)
 	runNumberTest(900, "nine hundred", t)
+	runNumberTest(999, "nine hundred ninety-nine", t)
 }
 
 func runNumberTest(num int, text string, t *testing.T) (string, error) {
