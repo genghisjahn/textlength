@@ -1,137 +1,34 @@
 package textlength
 
 import "testing"
+import "errors"
+import "fmt"
 
-func Test1(t *testing.T) {
-	result, err := GetTextForOneDigit(1)
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	correct := "one"
-	if result != correct {
-		t.Errorf("result is = %v, want %v.", result, correct)
-	}
+func TestNumbers(t *testing.T) {
+	runNumberTest(1, "one", t)
+	runNumberTest(10, "ten", t)
+	runNumberTest(15, "fifteen", t)
+	runNumberTest(16, "sixteen", t)
+	runNumberTest(42, "forty-two", t)
+	runNumberTest(88, "eighty-eight", t)
+	runNumberTest(100, "one hundred", t)
+	runNumberTest(110, "one hundred ten", t)
+	runNumberTest(320, "three hundred twenty", t)
+	runNumberTest(562, "five hundred sixty-two", t)
+	runNumberTest(814, "eight hundred fourteen", t)
+	runNumberTest(900, "nine hundred", t)
 }
 
-func Test10(t *testing.T) {
-	expected := "ten"
-	result, err := GetTextForTwoDigitNum(10)
+func runNumberTest(num int, text string, t *testing.T) (string, error) {
+	result, err := GetTextOfThreeDigitNumber(num, "")
 	if err != nil {
 		t.Error(err)
-		return
 	}
-	if result != expected {
-		t.Errorf("Returned: %v\nExpected: %v", result, expected)
-	}
-}
-
-func Test16(t *testing.T) {
-	expected := "sixteen"
-	result, err := GetTextForTwoDigitNum(16)
-	if err != nil {
+	if result != text {
+		err = errors.New(fmt.Sprintf("\nGave: %v\nExpected: %v\nResult: %v", num, text, result))
 		t.Error(err)
-		return
 	}
-	if result != expected {
-		t.Errorf("Returned: %v\nExpected: %v", result, expected)
-	}
-}
-
-func Test15(t *testing.T) {
-	expected := "fifteen"
-	result, err := GetTextForTwoDigitNum(15)
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	if result != expected {
-		t.Errorf("Returned: %v\nExpected: %v", result, expected)
-	}
-}
-
-func Test42(t *testing.T) {
-	expected := "forty-two"
-	result, err := GetTextForTwoDigitNum(42)
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	if result != expected {
-		t.Errorf("Returned: %v\nExpected: %v", result, expected)
-	}
-}
-
-func Test88(t *testing.T) {
-	expected := "eighty-eight"
-	result, err := GetTextForTwoDigitNum(88)
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	if result != expected {
-		t.Errorf("Returned: %v\nExpected: %v", result, expected)
-	}
-}
-
-func Test110(t *testing.T) {
-	result, err := GetTextOfThreeDigitNumber(110, "")
-	expected := "one hundred ten"
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	if result != expected {
-		t.Errorf("Returned: %v\nExpected: %v", result, expected)
-	}
-}
-
-func Test562(t *testing.T) {
-	result, err := GetTextOfThreeDigitNumber(562, "")
-	expected := "five hundred sixty-two"
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	if result != expected {
-		t.Errorf("Returned: %v\nExpected: %v", result, expected)
-	}
-}
-
-func Test814(t *testing.T) {
-	result, err := GetTextOfThreeDigitNumber(814, "")
-	expected := "eight hundred fourteen"
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	if result != expected {
-		t.Errorf("Returned: %v\nExpected: %v", result, expected)
-	}
-}
-
-func Test100(t *testing.T) {
-	result, err := GetTextOfThreeDigitNumber(100, "")
-	expected := "one hundred"
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	if result != expected {
-		t.Errorf("Returned: %v\nExpected: %v", result, expected)
-	}
-}
-
-func Test900(t *testing.T) {
-	result, err := GetTextOfThreeDigitNumber(900, "")
-	expected := "nine hundred"
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	if result != expected {
-		t.Errorf("Returned: %v\nExpected: %v", result, expected)
-	}
+	return result, nil
 }
 
 func TestTextLengthItem(t *testing.T) {

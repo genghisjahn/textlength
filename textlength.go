@@ -37,14 +37,14 @@ func GetTextOfThreeDigitNumber(i int, suffix string) (string, error) {
 		}
 	case 2:
 		{
-			num, _ := strconv.Atoi(string(stringInt[1:]))
+			num, _ := strconv.Atoi(stringInt)
 			text, err := GetTextForTwoDigitNum(num)
 			result = fmt.Sprintf("%v", text)
 			return result, err
 		}
 	case 1:
 		{
-			num, _ := strconv.Atoi(string(stringInt[2]))
+			num, _ := strconv.Atoi(stringInt)
 			text, err := GetTextForOneDigit(num)
 			result = fmt.Sprintf("%v", text)
 			return result, err
@@ -124,32 +124,32 @@ func GetTextForTwoDigitNum(i int) (string, error) {
 	if i > 15 {
 		tensPlace = "teen"
 	}
-	if i > 20 {
+	if i >= 20 {
 		tensPlace = "twenty"
 	}
-	if i > 30 {
+	if i >= 30 {
 		tensPlace = "thirty"
 	}
-	if i > 40 {
+	if i >= 40 {
 		tensPlace = "forty"
 	}
-	if i > 50 {
+	if i >= 50 {
 		tensPlace = "fifty"
 	}
-	if i > 60 {
+	if i >= 60 {
 		tensPlace = "sixty"
 	}
-	if i > 70 {
+	if i >= 70 {
 		tensPlace = "seventy"
 	}
-	if i > 80 {
+	if i >= 80 {
 		tensPlace = "eighty"
 	}
-	if i > 90 {
+	if i >= 90 {
 		tensPlace = "niney"
 	}
 	onesDigit, _ := GetTextForOneDigit(int(math.Mod(float64(i), float64(10))))
-	if tensPlace != "teen" {
+	if tensPlace != "teen" && onesDigit != "" {
 		result = fmt.Sprintf("%v-%v", tensPlace, onesDigit)
 	} else {
 		result = fmt.Sprintf("%v%v", onesDigit, tensPlace)
