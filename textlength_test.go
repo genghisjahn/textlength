@@ -86,6 +86,30 @@ func Test110(t *testing.T) {
 	}
 }
 
+func Test562(t *testing.T) {
+	result, err := GetTextOfThreeDigitNumber(562, "")
+	expected := "five hundred sixty-two"
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	if result != expected {
+		t.Errorf("Returned: %v\nExpected: %v", result, expected)
+	}
+}
+
+func Test814(t *testing.T) {
+	result, err := GetTextOfThreeDigitNumber(814, "")
+	expected := "eight hundred fourteen"
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	if result != expected {
+		t.Errorf("Returned: %v\nExpected: %v", result, expected)
+	}
+}
+
 func Test100(t *testing.T) {
 	result, err := GetTextOfThreeDigitNumber(100, "")
 	expected := "one hundred"
