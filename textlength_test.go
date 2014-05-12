@@ -26,6 +26,18 @@ func TestOneHundred(t *testing.T) {
 	}
 }
 
+func TestNineHundred(t *testing.T) {
+	result, err := GetTextOfThreeDigitNumber(900, "")
+	expected := "nine hundred"
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	if result != expected {
+		t.Errorf("Returned: %v\nExpected: %v", result, expected)
+	}
+}
+
 func TestTextLengthItem(t *testing.T) {
 	tli := TextLengthItem{"This text is forty characters long.", 20}
 	if tli.Length() != 35 {
