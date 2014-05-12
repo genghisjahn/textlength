@@ -4,7 +4,7 @@ import "testing"
 import "errors"
 import "fmt"
 
-func TestNumbers(t *testing.T) {
+func TestThreeDigitOrLessNumbers(t *testing.T) {
 	runNumberTest(1, "one", t)
 	runNumberTest(10, "ten", t)
 	runNumberTest(15, "fifteen", t)
@@ -20,6 +20,9 @@ func TestNumbers(t *testing.T) {
 	runNumberTest(814, "eight hundred fourteen", t)
 	runNumberTest(900, "nine hundred", t)
 	runNumberTest(999, "nine hundred ninety-nine", t)
+}
+func TestFourDigitNumbers(t *testing.T) {
+	runNumberTest(1001, "one thousand one", t)
 }
 
 func runNumberTest(num int, text string, t *testing.T) (string, error) {
