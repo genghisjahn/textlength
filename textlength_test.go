@@ -70,6 +70,7 @@ func runNumberTest(num int, text string, t *testing.T) (string, error) {
 			t.Error(err)
 		}
 	}
+	// fmt.Printf("Test for %v returned %v just fine.\n", num, text)
 	return result, nil
 }
 
