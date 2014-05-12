@@ -6,11 +6,15 @@ import "strconv"
 import "math"
 import "strings"
 
-var singleValueErrorMessage = "Value supplied was %v.  Value must be %v %v."
-var somethingWentWrongErrorMesasge = "Something went wrong in GetTextofThreeDigitNumber!"
-var notImplementedYet = "Not implemented yet."
+var singleValueErrorMessage = "\nValue supplied was %v.  Value must be %v %v."
+var somethingWentWrongErrorMesasge = "\nSomething went wrong in GetTextofThreeDigitNumber!"
+var notImplementedYet = "\nNot implemented yet."
+var numberMustBeLessThanOneBillion = "\nValue supplied was %v.  Value must be less than one billion."
 
 func GetTextForInt(i int) (string, error) {
+	if i >= 1000000000 {
+		return "", errors.New(fmt.Sprintf(numberMustBeLessThanOneBillion, i))
+	}
 	stringInt := strconv.Itoa(i)
 	stringLen := len(stringInt)
 	err := errors.New("")
@@ -25,6 +29,13 @@ func GetTextForInt(i int) (string, error) {
 		hundredsResult, _ := getTextOfThreeDigitNumber(hundredsDigits, "")
 		thousandsResult, _ := getTextOfThreeDigitNumber(thousandsDigits, "thousand")
 		result = fmt.Sprintf("%v %v", thousandsResult, hundredsResult)
+	}
+	if stringLen > 6 && stringLen <= 9 {
+		thousandsDigits := int(math.Mod(float64(i), float64(1000000)))
+		millionsDigits := int(i / 1000000)
+		thousandsResult, _ := GetTextForInt(thousandsDigits)
+		millionsResult, _ := getTextOfThreeDigitNumber(millionsDigits, "million")
+		result = fmt.Sprintf("%v %v", millionsResult, thousandsResult)
 	}
 	return strings.TrimSpace(result), err
 }
