@@ -9,11 +9,11 @@ import "strings"
 var singleValueErrorMessage = "\nValue supplied was %v.  Value must be %v %v."
 var somethingWentWrongErrorMesasge = "\nSomething went wrong in GetTextofThreeDigitNumber!"
 var notImplementedYet = "\nNot implemented yet."
-var numberMustBeLessThanOneBillion = "\nValue supplied was %v.  Value must be less than one billion."
+var numberMustBeLessThanOneTrillion = "\nValue supplied was %v.  Value must be less than one trillion."
 
 func GetTextForInt(i int) (string, error) {
-	if i >= 1000000000 {
-		return "", errors.New(fmt.Sprintf(numberMustBeLessThanOneBillion, i))
+	if i >= 1000000000000 {
+		return "", errors.New(fmt.Sprintf(numberMustBeLessThanOneTrillion, i))
 	}
 	stringInt := strconv.Itoa(i)
 	stringLen := len(stringInt)
@@ -24,20 +24,25 @@ func GetTextForInt(i int) (string, error) {
 		result, err = getTextOfThreeDigitNumber(i, "")
 	}
 	if stringLen > 3 && stringLen <= 6 {
-		hundredsDigits := int(math.Mod(float64(i), float64(1000)))
-		thousandsDigits := int(i / 1000)
-		hundredsResult, _ := getTextOfThreeDigitNumber(hundredsDigits, "")
-		thousandsResult, _ := getTextOfThreeDigitNumber(thousandsDigits, "thousand")
-		result = fmt.Sprintf("%v %v", thousandsResult, hundredsResult)
+		result, err = processNumber(i, "thousand", 1000)
 	}
 	if stringLen > 6 && stringLen <= 9 {
-		thousandsDigits := int(math.Mod(float64(i), float64(1000000)))
-		millionsDigits := int(i / 1000000)
-		thousandsResult, _ := GetTextForInt(thousandsDigits)
-		millionsResult, _ := getTextOfThreeDigitNumber(millionsDigits, "million")
-		result = fmt.Sprintf("%v %v", millionsResult, thousandsResult)
+		result, err = processNumber(i, "million", 1000000)
+	}
+	if stringLen > 9 && stringLen <= 12 {
+		result, err = processNumber(i, "billion", 1000000000)
 	}
 	return strings.TrimSpace(result), err
+}
+func processNumber(i int, suffix string, divisor int) (string, error) {
+	err := errors.New("")
+	err = nil
+	trailingDigits := int(math.Mod(float64(i), float64(divisor)))
+	leadingDigits := int(i / divisor)
+	trailingResult, err := GetTextForInt(trailingDigits)
+	leadingResult, err := getTextOfThreeDigitNumber(leadingDigits, suffix)
+	result := fmt.Sprintf("%v %v", leadingResult, trailingResult)
+	return result, err
 }
 
 func getTextOfThreeDigitNumber(i int, suffix string) (string, error) {

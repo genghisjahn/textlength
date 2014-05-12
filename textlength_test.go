@@ -54,8 +54,10 @@ func TestSevenToNineDigitNumbers(t *testing.T) {
 	runNumberTest(813015010, "eight hundred thirteen million fifteen thousand ten", t)
 	runNumberTest(999999999, "nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine", t)
 }
-func TestOneBillionOrMoreShouldFail(t *testing.T) {
+
+func TestOverOneBillion(t *testing.T) {
 	runNumberTest(1000000000, "one billion", t)
+	runNumberTest(999999999999, "nine hundred ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine", t)
 }
 
 func runNumberTest(num int, text string, t *testing.T) (string, error) {
