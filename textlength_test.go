@@ -73,10 +73,3 @@ func runNumberTest(num int, text string, t *testing.T) (string, error) {
 	// fmt.Printf("Test for %v returned %v just fine.\n", num, text)
 	return result, nil
 }
-
-func TestTextLengthItem(t *testing.T) {
-	tli := TextLengthItem{"This text is forty characters long.", 20}
-	if tli.Length() != 35 {
-		t.Errorf("Length was %v, expected %v.", tli.Length(), 3)
-	}
-}
