@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>TextLength Demo</title>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div>
+			<textarea id="processText" rows="8" style="width:400px;" /></textarea>
+			<br/>
+			<input type='button' value='Submit' onClick="ProcessText();" /> 
+		</div>
+		<br />
+		<div id='divResult' style="border:black 1px solid;width:400px;">
+			<br />
+			<br /><br /><br /><br />
+		</div>
+		<div id="divNoWork" style="width:400px;display:none;">Sometimes the text lenght/value combinations don't exist.  Remove some puncuation or alter the text and it should work.</div>
+		<br/>
+		<div id="divCount"></div>
+		<script>
+		var processRunning = false;
+		function ProcessText(){
+			var text = $('#processText').val();
+			$('#divNoWork').hide();
+			if (text.length<=1000){
+				$.ajax({
+				url: '/process/',
+				type: 'POST',
+				data: {"text": text},
+				success: function(response){
+					$('#divResult').html(response);
+					$('#divCount').html('JavaScript reponse.length: '+ response.length);
+						if (response.length==0){
+							$('#divNoWork').show();
+						}
+					}
+				});
+			}
+			else{
+				$('#divResult').html("Text can't be longer than 1000 characters.");
+				$('#divCount').html('JavaScript text.length: '+text.length);
+			}
+		}	
+		</script>
+		<br/>
+		<span>Inspired by the mouseover text on <a href="http://www.xkcd.com/688/">XKCD 688</a>.</span>
+	</body>
+	
+</html>
