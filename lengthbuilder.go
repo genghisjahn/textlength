@@ -1,7 +1,6 @@
 package textlength
 
 import "fmt"
-import "errors"
 
 func BuildItems(numItems int) ([]TextLengthItem, error) {
 	result := make([]TextLengthItem, numItems)
@@ -14,7 +13,7 @@ func BuildItems(numItems int) ([]TextLengthItem, error) {
 	return result, nil
 }
 
-func ProcessText(text string, items []TextLengthItem) (string, error) {
+func ProcessText(text string, items []TextLengthItem) string {
 	result:="Couldn't make this one work.  Sometimes the numbers just won't add up."
 	first_part := "This text is %v characters in length."
 	result_template := "%v  %v"
@@ -22,9 +21,8 @@ func ProcessText(text string, items []TextLengthItem) (string, error) {
 	for _, item := range items {
 		length_sentence := fmt.Sprintf(first_part, item.Text)
 		if textLength+len(length_sentence) == item.Value {
-			return fmt.Sprintf(result_template, text, length_sentence), nil
+			result = fmt.Sprintf(result_template, text, length_sentence)
 		}
 	}
-	err := errors.New(fmt.Sprintf("ProcessText for {%v} went wrong.", text))
-	return result, err
+	return result
 }
