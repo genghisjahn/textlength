@@ -13,9 +13,9 @@ func TestBuild1000(t *testing.T) {
 	}
 }
 
-func TestBuild1000000(t *testing.T) {
-	expected := "one million"
-	items, err := BuildItems(1000000)
+func TestBuild10000(t *testing.T) {
+	expected := "ten thousand"
+	items, err := BuildItems(10000)
 	if err != nil {
 		t.Error(err)
 	}
@@ -29,12 +29,13 @@ func TestHello(t *testing.T) {
 	text := "Hello."
 	items, err := BuildItems(10000)
 	if err != nil {
-		text_with_length, _ := ProcessText(text, items)
-		if expected != text_with_length {
-			t.Errorf("Value: %v Expected: %v", text_with_length, expected)
-		}
+		t.Error(err)
 	}
-	t.Error(err)
+	text_with_length, _ := ProcessText(text, items)
+	if expected != text_with_length {
+		t.Errorf("Value: %v Expected: %v", text_with_length, expected)
+	}
+
 }
 
 func TestHelloIsItMe(t *testing.T) {
@@ -42,10 +43,10 @@ func TestHelloIsItMe(t *testing.T) {
 	text := "Hello.  Is it me you're looking for?"
 	items, err := BuildItems(10000)
 	if err != nil {
-		text_with_length, _ := ProcessText(text, items)
-		if expected != text_with_length {
-			t.Errorf("Value: %v Expected: %v", text_with_length, expected)
-		}
+		t.Error(err)
 	}
-	t.Error(err)
+	text_with_length, _ := ProcessText(text, items)
+	if expected != text_with_length {
+		t.Errorf("Value: %v Expected: %v", text_with_length, expected)
+	}
 }
