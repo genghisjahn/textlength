@@ -35,7 +35,6 @@ func TestHello(t *testing.T) {
 	if expected != text_with_length {
 		t.Errorf("Value: %v Expected: %v", text_with_length, expected)
 	}
-
 }
 
 func TestHelloIsItMe(t *testing.T) {

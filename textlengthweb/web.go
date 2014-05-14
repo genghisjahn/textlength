@@ -21,7 +21,7 @@ func processHandler(rw http.ResponseWriter, req *http.Request) {
 	fmt.Printf("Processing text: {%v} at %v.\n", text, time.Now())
 	result, _ := textlength.ProcessText(text, items)
 	fmt.Fprintf(rw, "%v", result)
-	fmt.Printf("Returned at %v.\n", time.Now())
+	fmt.Printf("Returned {%v} at %v.\n", result, time.Now())
 }
 
 func queryHandler(rw http.ResponseWriter, req *http.Request) {

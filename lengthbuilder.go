@@ -8,7 +8,7 @@ func BuildItems(numItems int) ([]TextLengthItem, error) {
 	for i := 1; i <= numItems; i++ {
 		item := TextLengthItem{}
 		item.Value = i
-		item.Text, _ = GetTextForInt(i)
+		item.Text, _ = GetTextForInt(item.Value)
 		result[i-1] = item
 	}
 	return result, nil
