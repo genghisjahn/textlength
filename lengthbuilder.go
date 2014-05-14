@@ -15,6 +15,7 @@ func BuildItems(numItems int) ([]TextLengthItem, error) {
 }
 
 func ProcessText(text string, items []TextLengthItem) (string, error) {
+	result:="Couldn't make this one work.  Sometimes the numbers just won't add up."
 	first_part := "This text is %v characters in length."
 	result_template := "%v  %v"
 	textLength := len(text) + 2
@@ -25,5 +26,5 @@ func ProcessText(text string, items []TextLengthItem) (string, error) {
 		}
 	}
 	err := errors.New(fmt.Sprintf("ProcessText for {%v} went wrong.", text))
-	return "", err
+	return result, err
 }

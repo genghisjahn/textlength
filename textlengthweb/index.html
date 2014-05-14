@@ -14,14 +14,11 @@
 			<br />
 			<br /><br /><br /><br />
 		</div>
-		<div id="divNoWork" style="width:400px;display:none;">Sometimes the text lenght/value combinations don't exist.  Remove some puncuation or alter the text and it should work.</div>
-		<br/>
 		<div id="divCount"></div>
 		<script>
 		var processRunning = false;
 		function ProcessText(){
 			var text = $('#processText').val();
-			$('#divNoWork').hide();
 			if (text.length<=1000){
 				$.ajax({
 				url: '/process/',
