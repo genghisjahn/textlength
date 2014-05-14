@@ -12,4 +12,4 @@ Create a directory, navigate to it and run the following from the command line:
 
 `go run web.go`
 
-Open a browser and navigate to http://localhost:8888/query/
+Open a browser and navigate to [http://localhost:8888/query/](http://localhost:8888/query/).
