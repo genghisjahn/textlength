@@ -12,7 +12,7 @@ var items []textlength.TextLengthItem
 func main() {
 	items, _ = textlength.BuildItems(10000)
 	fmt.Printf("Text Length web server is running. %v\n", time.Now())
-	fmt.Printf("Navigate your browser to http://localhost:8888/query/\n")
+	fmt.Printf("Navigate your browser to http://localhost:8888/\n")
 	http.HandleFunc("/process/", processHandler)
 	http.HandleFunc("/", queryHandler)
 	http.ListenAndServe("localhost:8888", nil)
