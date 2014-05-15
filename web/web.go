@@ -14,7 +14,7 @@ func main() {
 	fmt.Printf("Text Length web server is running. %v\n", time.Now())
 	fmt.Printf("Navigate your browser to http://localhost:8888/query/\n")
 	http.HandleFunc("/process/", processHandler)
-	http.HandleFunc("/query/", queryHandler)
+	http.HandleFunc("/", queryHandler)
 	http.ListenAndServe("localhost:8888", nil)
 }
 
