@@ -14,15 +14,17 @@ func BuildItems(numItems int) ([]TextLengthItem, error) {
 }
 
 func ProcessText(text string, items []TextLengthItem) string {
-	result:="Couldn't make this one work.  Sometimes the numbers just won't add up."
-	first_part := "This text is %v characters in length."
+	firstParts := []string{"This text is %v characters in length.", "Text is %v characters long.", "Text is %v characters in length."}
 	result_template := "%v  %v"
 	textLength := len(text) + 2
-	for _, item := range items {
-		length_sentence := fmt.Sprintf(first_part, item.Text)
-		if textLength+len(length_sentence) == item.Value {
-			result = fmt.Sprintf(result_template, text, length_sentence)
+	for _, firstPart := range firstParts {
+		for _, item := range items {
+			length_sentence := fmt.Sprintf(firstPart, item.Text)
+			if textLength+len(length_sentence) == item.Value {
+				return fmt.Sprintf(result_template, text, length_sentence)
+			}
+
 		}
 	}
-	return result
+	return "No match found."
 }
