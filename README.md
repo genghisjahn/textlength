@@ -11,8 +11,8 @@ Create a directory, navigate to it and run the following from the command line:
 
 `git clone git@github.com:genghisjahn/textlength.git`
 
-`cd textlength/textlengthweb/`
+`cd textlength/web/`
 
 `go run web.go`
 
-Open a browser and navigate to [http://localhost:8888/query/](http://localhost:8888/query/).
+Open a browser and navigate to [http://localhost:8888/](http://localhost:8888/).
