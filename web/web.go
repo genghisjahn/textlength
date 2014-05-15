@@ -21,7 +21,7 @@ func main() {
 func processHandler(rw http.ResponseWriter, req *http.Request) {
 	text := strings.TrimSpace(req.PostFormValue("text"))
 	fmt.Printf("Processing text: {%v} at %v.\n", text, time.Now())
-	result, _ := textlength.ProcessText(text, items)
+	result := textlength.ProcessText(text, items)
 	fmt.Fprintf(rw, "%v", result)
 	fmt.Printf("Returned {%v} at %v.\n", result, time.Now())
 }
