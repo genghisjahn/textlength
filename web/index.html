@@ -4,10 +4,9 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	</head>
 	<body>
-		<div>
-			<textarea id="processText" rows="8" style="width:400px;" /></textarea>
+		<div><span>Type in the text box below:</span><br/>
+			<textarea id="processText" onKeyUp="ProcessText();" rows="8" style="width:400px;" /></textarea>
 			<br/>
-			<input type='button' value='Submit' onClick="ProcessText();" /> 
 		</div>
 		<br />
 		<div id='divResult' style="border:black 1px solid;width:400px;">
