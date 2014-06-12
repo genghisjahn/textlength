@@ -1,7 +1,14 @@
 textlength
 ==========
 
-Adds the string representation of a string to the string, taking into account the added numeric string representation.
+Adds the string representation of the length of a string to the string, taking into account the added numeric string representation.
+
+Input:
+`Here's an example right here.`
+
+Output:
+`Here's an example right here. Text is sixty-seven characters long.`
+
 Take a look at the hover text for this xkcd comic: http://www.xkcd.com/688/
 
 
