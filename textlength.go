@@ -202,3 +202,13 @@ func getTextForTwoDigitNum(i int) (string, error) {
 
 	return result, nil
 }
+
+func GoVetDemo(param string) (int, error) {
+	fmt.Printf("Hello %v, %v", "John", "David", "Smith")
+
+	v := 5
+	v = v
+
+	return 1, nil
+	return 0, nil
+}
