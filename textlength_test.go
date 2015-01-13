@@ -4,22 +4,23 @@ import "testing"
 import "errors"
 import "fmt"
 
+type TestItem struct {
+	Num  int
+	Text string
+}
+
+var ThreeOrLess = []TestItem{{1, "one"}, {10, "ten"}, {15, "fifteen"}, {16, "sixteen"},
+	{42, "forty-two"}, {88, "eighty-eight"}, {100, "one hundred"}, {110, "one hundred ten"},
+	{320, "three hundred twenty"}, {330, "three hundred thirty"}, {380, "three hundred eighty"},
+	{562, "five hundred sixty-two"}, {814, "eight hundred fourteen"}, {900, "nine hundred"},
+	{999, "nine hundred ninety-nine"}}
+
 func TestThreeDigitOrLessNumbers(t *testing.T) {
-	runNumberTest(1, "one", t)
-	runNumberTest(10, "ten", t)
-	runNumberTest(15, "fifteen", t)
-	runNumberTest(16, "sixteen", t)
-	runNumberTest(42, "forty-two", t)
-	runNumberTest(88, "eighty-eight", t)
-	runNumberTest(100, "one hundred", t)
-	runNumberTest(110, "one hundred ten", t)
-	runNumberTest(320, "three hundred twenty", t)
-	runNumberTest(330, "three hundred thirty", t)
-	runNumberTest(380, "three hundred eighty", t)
-	runNumberTest(562, "five hundred sixty-two", t)
-	runNumberTest(814, "eight hundred fourteen", t)
-	runNumberTest(900, "nine hundred", t)
-	runNumberTest(999, "nine hundred ninety-nine", t)
+	for _, ti := range ThreeOrLess {
+		if err := runNumberTestAlt(ti.Num, ti.Text); err != nil {
+			t.Error(err)
+		}
+	}
 }
 
 func TestFourToSixDigitNumbers(t *testing.T) {
@@ -70,6 +71,17 @@ func runNumberTest(num int, text string, t *testing.T) (string, error) {
 			t.Error(err)
 		}
 	}
-	// fmt.Printf("Test for %v returned %v just fine.\n", num, text)
 	return result, nil
+}
+
+func runNumberTestAlt(num int, text string) error {
+	result, err := GetTextForInt(num)
+	if err != nil {
+		return err
+	}
+	if result != text {
+		err = fmt.Errorf("\nGave: %v\nExpected: %v\nResult: %v", num, text, result)
+		return err
+	}
+	return nil
 }
