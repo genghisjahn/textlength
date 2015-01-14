@@ -13,7 +13,8 @@ var numberMustBeLessThanOneTrillion = "\nValue supplied was %v.  Value must be l
 
 func GetTextForInt(i int) (string, error) {
 	if i >= 1000000000000 {
-		return "", errors.New(fmt.Sprintf(numberMustBeLessThanOneTrillion, i))
+		//return "", errors.New(fmt.Sprintf(numberMustBeLessThanOneTrillion, i))
+		return "", fmt.Errorf(numberMustBeLessThanOneTrillion, i)
 	}
 	stringInt := strconv.Itoa(i)
 	stringLen := len(stringInt)
@@ -203,6 +204,7 @@ func getTextForTwoDigitNum(i int) (string, error) {
 	return result, nil
 }
 
+//GoVetDemo THis is a demo funcntion
 func GoVetDemo(param string) (int, error) {
 	fmt.Printf("Hello %v, %v", "John", "David", "Smith")
 
